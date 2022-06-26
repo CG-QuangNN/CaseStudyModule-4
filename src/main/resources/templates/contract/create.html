@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css"/>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">
+</head>
+<body>
+<th:block th:replace="~{/common/layout::logo}"/>
+<th:block th:replace="~{/common/layout::menu}"/>
+<div class="d-flex" style="justify-content: center">
+    <h1>Create Customer</h1>
+</div>
+<div class="container">
+    <form th:action="@{/contract/create}" th:object="${contract}" method="post">
+        <div class="row mb-3">
+            <label th:for="contractStartDate" class="col-sm-2 col-form-label">Start Date</label>
+            <div class="col-sm-10">
+                <input type="datetime-local" th:field="*{contractStartDate}" class="form-control">
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <label th:for="contractEndDate" class="col-sm-2 col-form-label">End Date</label>
+            <div class="col-sm-10">
+                <input type="datetime-local" th:field="*{contractEndDate}" class="form-control">
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <label th:for="customerName" class="col-sm-2 col-form-label">Deposit</label>
+            <div class="col-sm-10">
+                <input type="number" th:field="*{contractDeposit}" class="form-control">
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <label th:for="contractTotalMoney" class="col-sm-2 col-form-label">Total Money</label>
+            <div class="col-sm-10">
+                <input type="number" th:field="*{contractTotalMoney}" class="form-control">
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <label th:for="employee" class="col-sm-2 col-form-label">Employee Id</label>
+            <div class="col-sm-10">
+                <select th:field="*{employee}" class="form-select">
+                    <option th:each="employeeId : ${contractCreateResponseDto.employeeIdList}"
+                            th:value="${employeeId}"
+                            th:text="${employeeId}"></option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <label th:for="customer" class="col-sm-2 col-form-label">Customer Id</label>
+            <div class="col-sm-10">
+                <select th:field="*{customer}" class="form-select">
+                    <option th:each="customerId : ${contractCreateResponseDto.customerIdList}"
+                            th:value="${customerId}"
+                            th:text="${customerId}"></option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <label th:for="employee" class="col-sm-2 col-form-label">Service Code</label>
+            <div class="col-sm-10">
+                <select th:field="*{service}" class="form-select">
+                    <option th:each="serviceIdCodeDto : ${contractCreateResponseDto.serviceIdCodeDtoList}"
+                            th:value="${serviceIdCodeDto.serviceId}"
+                            th:text="${serviceIdCodeDto.serviceCode}"></option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <label class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-10">
+                <input type="submit" class="btn btn-primary btn-lg btn-block" value="Save">
+            </div>
+        </div>
+    </form>
+</div>
+
+<th:block th:replace="~{/common/layout::footer}"/>
+</body>
+</html>
